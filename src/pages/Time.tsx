@@ -7,7 +7,7 @@ function Time() {
     useEffect(() => {
         const fetchTime = async () => {
           try {
-            const response = await fetch('http://localhost:2023/server/time');
+            const response = await fetch('https://tp-docker-server-app-fullstack-1-0.onrender.com/server/time');
             if (!response.ok) {
               throw new Error('Failed to fetch data');
             }
