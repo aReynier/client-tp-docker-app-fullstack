@@ -1,31 +1,26 @@
-import { useEffect, useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function Index() {
-    const [data, setData] = useState("");
+    const [name, setName] = useState("");
 
-    useEffect(() => {
-        const fetchAppointment = async () => {
-          try {
-            const response = await fetch('http://localhost:1992/hello/:name');
-            if (!response.ok) {
-              throw new Error('Failed to fetch data');
-            }
-            const result = await response.json();
-            setData(result);
-    
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
+    const navigate = useNavigate();
 
-        console.log(data);
-      
-        fetchAppointment();
-      }, []);
+      const handleSubmit = (event) => {
+        event.preventDefault();
+
+        navigate(`/hello/${name}`, {state: {userName: name}});
+      };
 
     return (
         <div>
-            This is home page
+            <h1>This is the home page</h1>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="nameInput">Please enter your name:</label><br/>
+              <input type="text" id="nameInput" name="name" value={name} onChange={(event) => setName(event.target.value)} required />
+              <input type="submit" value="Validate" />
+            </form>
         </div>
     )
   }

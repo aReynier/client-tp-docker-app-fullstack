@@ -1,12 +1,13 @@
+import React from "react";
 import { useState, useEffect } from "react";
 
 function Time() {
-    const [data, setData] = useState("");
+    const [data, setData] = useState({ time: null });
 
     useEffect(() => {
         const fetchTime = async () => {
           try {
-            const response = await fetch('http://localhost:1992/server/time');
+            const response = await fetch('http://localhost:2023/server/time');
             if (!response.ok) {
               throw new Error('Failed to fetch data');
             }
@@ -24,8 +25,8 @@ function Time() {
 
     return (
         <div>
-            This is time page<br />
-            The time is { data? data.time as string : "" }
+            <h1>This is the time page</h1>
+            The time is { data.time ? (new Date(data.time)).toString() : ', wait a minute...' }
         </div>
     )
   }
